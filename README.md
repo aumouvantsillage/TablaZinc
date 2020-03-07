@@ -44,7 +44,7 @@ We provide the following data files:
 
 Three model files are currently available:
 
-* `tablazinc-satisfy.mzn` generates a tablature with the correct notes, but
+* `src/tablazinc-satisfy.mzn` generates a tablature with the correct notes, but
   with no concern for playability.
 
 ```
@@ -56,7 +56,7 @@ Three model files are currently available:
 --------------------------------------------------------------------------------------------
 ```
 
-* `tablazinc-fret-distance.mzn` attempts to minimize the distance between
+* `src/tablazinc-fret-distance.mzn` attempts to minimize the distance between
   consecutive notes on the fretboard. There is no constraint on which finger to use for each note.
 
 ```
@@ -68,7 +68,7 @@ Three model files are currently available:
 --------------------------------------------------------------------------------------------
 ```
 
-* `tablazinc-finger-distance.mzn` attempts to minimize the distance between
+* `src/tablazinc-finger-distance.mzn` attempts to minimize the distance between
   finger locations for consecutive notes. This version can take several minutes to complete
   with the default solver, even for such a short melody.
 
