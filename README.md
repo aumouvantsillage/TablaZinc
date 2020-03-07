@@ -39,7 +39,7 @@ Example
 We provide the following data files:
 
 * `data/guitar-std.dzn`, instrument definition parameters for the guitar in standard tuning.
-* `data/yardbird-suite.dzn`, the eight first bars of the jazz standard *Yardbird Suite* by Charlie Parker,
+* `data/yardbird-suite.dzn`, the first eight bars of the jazz standard *Yardbird Suite* by Charlie Parker,
   where consecutive notes with the same pitch have been merged.
 
 Three model files are currently available:
