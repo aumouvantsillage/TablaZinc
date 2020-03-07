@@ -10,21 +10,37 @@ The output is a tablature with fingering annotations for the fretting hand.
 The `src` and `data` folders contain model files and data files
 written in the [MiniZinc](https://www.minizinc.org/) language.
 
-Examples
---------
+Disclaimer
+----------
 
-We will use the following data files:
+I have no prior experience with constraint programming in general,
+and MiniZinc in particular.
+
+If you are a beginner in this field and are looking for well-written examples,
+this repository might not be the right place.
+
+If you are an expert, your feedback will be welcome.
+Please [open a new issue](https://github.com/senshu/TablaZinc/issues).
+
+Usage
+-----
+
+The following command outputs a tablature from two data files
+(an instrument definition file, and a melody file)
+using a set of constraints specified in a model file:
+
+```
+minizinc src/<model-file> data/<instrument-file> data/<melody-file>
+```
+
+Example
+-------
+
+We provide the following data files:
 
 * `data/guitar-std.dzn`, instrument definition parameters for the guitar in standard tuning.
 * `data/yardbird-suite.dzn`, the eight first bars of the jazz standard *Yardbird Suite* by Charlie Parker,
   where consecutive notes with the same pitch have been merged.
-
-The following command will generate a tablature from these data files
-using a set of constraints specified in a model file:
-
-```
-minizinc src/<model-file> data/yardbird-suite.dzn data/guitar-std.dzn
-```
 
 Three model files are currently available:
 
