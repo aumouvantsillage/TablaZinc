@@ -76,16 +76,19 @@ constraint forall(n ∈ note_index) (
 % ------------------------------------------------------------------------------
 
 output [
-    if fix(tab_strings[n]) = s then
-        show_int(2, tab_frets[n]) ++
-        if fix(tab_fingers[n]) > 0 then
-            finger_ids[fix(tab_fingers[n])]
-        else
-            " "
-        endif
+    let {
+        int: current_string = fix(tab_strings[n]);
+        int: current_finger = fix(tab_fingers[n]);
+        int: current_fret   = fix(tab_frets[n]);
+    } in
+    if current_string = s then
+        if current_fret < 10 then "-" else "" endif ++
+        show(current_fret) ++
+        if current_finger > 0 then finger_ids[current_finger] else "-" endif ++
+        "-"
     else
-        "---"
+        "----"
     endif ++
-    if n = melody_length then "\n" else " " endif |
+    if n = melody_length then "\n" else "" endif |
     s ∈ reverse(string_index), n ∈ note_index
 ];
