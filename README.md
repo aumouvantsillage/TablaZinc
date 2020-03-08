@@ -88,15 +88,36 @@ you can change the parameter `finger_ids` in the instrument definition file `gui
 Performance
 -----------
 
-This table shows the computation time, in seconds, for the datafile `yardbird-suite.dzn`
-with the default solver Gecode and each supported optimization level.
+The tables below show the computation time, in seconds, of the following command
+with each model file and each supported optimization level.
+We are using the default solver Gecode with one or two threads.
 
 ```
-minizinc -O<n> --output-time src/<model-file> data/<instrument-file> data/<melody-file>
+minizinc -p <n> -O<m> --output-time src/<model-file> data/guitar-std.dzn data/yardbird-suite.dzn
 ```
 
-| Model                           |  `-O1` |  `-O2` |  `-O3` | `-O4` | `-O5` |
+Using one thread (`-p 1`):
+
+| Model file / Optimization       |  `-O1` |  `-O2` |  `-O3` | `-O4` | `-O5` |
 |:--------------------------------|-------:|-------:|-------:|------:|------:|
 | `tablazinc-satisfy.mzn`         |   0.05 |   0.10 |   0.09 |  0.10 |  0.09 |
-| `tablazinc-fret-distance.mzn`   |  12.15 |  11.69 |  11.64 |  0.11 |  0.11 |
-| `tablazinc-finger-distance.mzn` | 374.50 | 536.83 | 585.84 | 61.93 | 62.05 |
+| `tablazinc-fret-distance.mzn`   |  11.51 |  12.21 |  12.04 |  0.12 |  0.11 |
+| `tablazinc-finger-distance.mzn` | 269.53 | 234.25 | 251.93 |  3.36 |  3.27 |
+
+Using two threads (`-p 2`):
+
+| Model file / Optimization       |  `-O1` |  `-O2` |  `-O3` | `-O4` | `-O5` |
+|:--------------------------------|-------:|-------:|-------:|------:|------:|
+| `tablazinc-satisfy.mzn`         |   0.04 |   0.09 |   0.09 |  0.10 |  0.09 |
+| `tablazinc-fret-distance.mzn`   |   6.64 |   7.06 |   7.05 |  0.14 |  0.13 |
+| `tablazinc-finger-distance.mzn` | 123.26 | 106.84 | 140.68 | 20.13 | 17.64 |
+
+Platform: computer with an Intel Core i5 CPU (2.7 GHz) running Ubuntu 18.04.
+
+Optimization levels `-O4` and `-O5` show a huge improvement compared to the
+other levels.
+Using two threads usually result in longer solving times at the highest optimization
+levels, but the performance can vary a lot between runs for no obvious reasons.
+
+For instance, I have run the model `tablazinc-finger-distance.mzn` with options `-p 2 -O4`
+three times in a row and got: 0.76sec, 6.95sec, and 38.17sec.
