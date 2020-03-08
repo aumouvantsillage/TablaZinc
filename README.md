@@ -70,7 +70,7 @@ Three model files are currently available:
 
 * `src/tablazinc-finger-distance.mzn` attempts to minimize the distance between
   finger locations for consecutive notes. This version can take several minutes to complete
-  with the default solver, even for such a short melody.
+  with the default solver and optimization level, even for such a short melody.
 
 ```
 -8i-----------------------------------------------------------------------------------------
@@ -84,3 +84,19 @@ Three model files are currently available:
 The fingering annotations use the letters `i` (index), `m` (middle), `r` (ring), and `p` (pinky).
 If you have a different number of fingers, or if you want to use other letters,
 you can change the parameter `finger_ids` in the instrument definition file `guitar-std.dzn`.
+
+Performance
+-----------
+
+This table shows the computation time, in seconds, for the datafile `yardbird-suite.dzn`
+with the default solver Gecode and each supported optimization level.
+
+```
+minizinc -O<n> --output-time src/<model-file> data/<instrument-file> data/<melody-file>
+```
+
+| Model                           |  `-O1` |  `-O2` |  `-O3` | `-O4` | `-O5` |
+|:--------------------------------|-------:|-------:|-------:|------:|------:|
+| `tablazinc-satisfy.mzn`         |   0.05 |   0.10 |   0.09 |  0.10 |  0.09 |
+| `tablazinc-fret-distance.mzn`   |  12.15 |  11.69 |  11.64 |  0.11 |  0.11 |
+| `tablazinc-finger-distance.mzn` | 374.50 | 536.83 | 585.84 | 61.93 | 62.05 |
